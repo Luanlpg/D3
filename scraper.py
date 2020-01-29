@@ -5,7 +5,12 @@ import json
 
 class ElixirLangSpider(scrapy.Spider):
     name = "elixir_spider"
-    start_urls = ['https://elixir-lang.org']
+    #start_urls = ['https://elixir-lang.org']
+    print('-----------------------------------------------------')
+    print('-----------------------------------------------------')
+    print('-----------------------------------------------------')
+    print('-----------------------------------------------------')
+    start_urls = [str(input('Insita url a ser crawleada >>>>'))]
 
     def __init__(self):
         self.document = []
@@ -16,10 +21,10 @@ class ElixirLangSpider(scrapy.Spider):
         Método que chama o parser de cada tela do site.
         ====================================================================="""
         # seletor de menu
-        MENU_SELECTOR = '.menu-item'
+        MENU_SELECTOR = 'a'
         for item in response.css(MENU_SELECTOR):
             # crio e envio urls para fazer requisição GET
-            HREF_SELECTOR = 'li a::attr(href)'
+            HREF_SELECTOR = '::attr(href)'
             yield self.get_secundary_page(response.urljoin(item.css(HREF_SELECTOR).extract_first()))
 
     def get_secundary_page(self, url):
